@@ -11,5 +11,3 @@ ALTER TABLE Pitching
   ADD CONSTRAINT fk_pitching_teams FOREIGN KEY (yearID, teamID) REFERENCES Teams(yearID, teamID),
   ADD CONSTRAINT ck_pitching_values CHECK (ER >= 0 AND HR >= 0 AND BB >= 0 AND SO >= 0);
 
-ALTER TABLE Teams
-  ADD CONSTRAINT uq_team_name_per_year UNIQUE (yearID, name);
