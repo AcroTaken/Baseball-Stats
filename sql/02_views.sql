@@ -13,3 +13,5 @@ SELECT t.name AS team_name, p.yearID,
     SUM(b.BB) AS total_walks,
     SUM(b.HR) AS total_hr_allowed
 FROM Pitching p
+JOIN Teams t USING (yearID, teamID)
+GROUP BY t.name, p.yearID;
