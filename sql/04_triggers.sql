@@ -6,7 +6,7 @@ BEGIN
     END IF;
     RETURN NEW;
 END;
-$$ LANGUAGE plpsql;
+$$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trg_validate_batting ON Batting;
 CREATE TRIGGER trg_validate_batting

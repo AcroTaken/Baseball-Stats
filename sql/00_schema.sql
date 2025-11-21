@@ -57,7 +57,6 @@ CREATE TABLE Appearances (
   lgID TEXT,
   playerID TEXT,
   G_all INT,
-  GS INT,
   G_batting INT,
   G_defense INT,
   G_p INT,
@@ -74,7 +73,6 @@ CREATE TABLE Appearances (
   G_ph INT,
   G_pr INT
 );
-
 
 
 DROP TABLE IF EXISTS Batting CASCADE;
