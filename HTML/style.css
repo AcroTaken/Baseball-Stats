@@ -475,3 +475,34 @@ label {
     font-weight: 500;
     color: #2c3e50;
 }
+
+/* Favorites styles */
+.favorite-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #ffb100;
+    margin-left: 8px;
+}
+
+.favorite-btn.outline { color: #999; }
+
+.favorites-section { margin-top: 25px; }
+.favorites-list { display: grid; gap: 10px; }
+.favorite-entry {
+    background-color: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #ffb100;
+}
+.fav-left { flex: 1; margin-right: 10px; }
+.fav-title { font-weight: 600; color: #2c3e50; }
+.fav-sub { color: #666; font-size: 13px; }
+.fav-actions button { margin-left: 8px; padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; }
+.fav-actions button.danger { background: #e74c3c; color: white; }
+.fav-actions button:hover { filter: brightness(0.95); }
+.no-favs { color: #666; font-style: italic; }

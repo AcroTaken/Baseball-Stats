@@ -113,8 +113,39 @@ async function updatePlayerList() {
             players.forEach((player) => {
                 const playerDiv = document.createElement("div");
                 playerDiv.className = "player-item";
-                playerDiv.innerHTML = `<div class="player-name">${player.name}</div>`;
-                playerDiv.onclick = () => showPlayerStats(player.playerID, player.name);
+
+                // Name clickable area
+                const nameEl = document.createElement('div');
+                nameEl.className = 'player-name';
+                nameEl.textContent = player.name;
+                nameEl.onclick = () => showPlayerStats(player.playerID, player.name);
+
+                // Favorite button
+                const favBtn = document.createElement('button');
+                favBtn.className = 'favorite-btn';
+                favBtn.title = 'Add/remove favorite player';
+
+                const isFav = window.Favorites && window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+                favBtn.textContent = isFav ? '★' : '☆';
+                if (!isFav) favBtn.classList.add('outline');
+
+                favBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (!window.Favorites) return;
+                    const currentlyFav = window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+                    if (currentlyFav) {
+                        window.Favorites.removeFavoritePlayer(player.playerID);
+                        favBtn.classList.add('outline');
+                        favBtn.textContent = '☆';
+                    } else {
+                    window.Favorites.addFavoritePlayer({ playerID: player.playerID, name: player.name, team: teamSelect.value, year: yearSelect.value });
+                        favBtn.classList.remove('outline');
+                        favBtn.textContent = '★';
+                    }
+                };
+
+                playerDiv.appendChild(nameEl);
+                playerDiv.appendChild(favBtn);
                 playerList.appendChild(playerDiv);
             });
         }
@@ -135,7 +166,35 @@ function filterPlayers() {
         allPlayers.forEach((player) => {
             const playerDiv = document.createElement("div");
             playerDiv.className = "player-item";
-            playerDiv.innerHTML = `<div class="player-name">${player.name}</div>`;
+
+            const nameEl = document.createElement('div');
+            nameEl.className = 'player-name';
+            nameEl.textContent = player.name;
+
+            const favBtn = document.createElement('button');
+            favBtn.className = 'favorite-btn';
+            favBtn.title = 'Add/remove favorite player';
+            const isFav = window.Favorites && window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+            favBtn.textContent = isFav ? '★' : '☆';
+            if (!isFav) favBtn.classList.add('outline');
+
+            favBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (!window.Favorites) return;
+                const currentlyFav = window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+                if (currentlyFav) {
+                    window.Favorites.removeFavoritePlayer(player.playerID);
+                    favBtn.classList.add('outline');
+                    favBtn.textContent = '☆';
+                } else {
+                    window.Favorites.addFavoritePlayer({ playerID: player.playerID, name: player.name, team: teamSelect.value, year: yearSelect.value });
+                    favBtn.classList.remove('outline');
+                    favBtn.textContent = '★';
+                }
+            };
+
+            playerDiv.appendChild(nameEl);
+            playerDiv.appendChild(favBtn);
             playerList.appendChild(playerDiv);
         });
         playerCount.textContent = `Total Players: ${allPlayers.length}`;
@@ -155,8 +214,37 @@ function filterPlayers() {
         filteredPlayers.forEach((player) => {
             const playerDiv = document.createElement("div");
             playerDiv.className = "player-item";
-            playerDiv.innerHTML = `<div class="player-name">${player.name}</div>`;
-            playerDiv.onclick = () => showPlayerStats(player.playerID, player.name);
+
+            const nameEl = document.createElement('div');
+            nameEl.className = 'player-name';
+            nameEl.textContent = player.name;
+            nameEl.onclick = () => showPlayerStats(player.playerID, player.name);
+
+            const favBtn = document.createElement('button');
+            favBtn.className = 'favorite-btn';
+            favBtn.title = 'Add/remove favorite player';
+
+            const isFav = window.Favorites && window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+            favBtn.textContent = isFav ? '★' : '☆';
+            if (!isFav) favBtn.classList.add('outline');
+
+            favBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (!window.Favorites) return;
+                const currentlyFav = window.Favorites.getFavoritePlayers().find(p => p.playerID === player.playerID);
+                if (currentlyFav) {
+                    window.Favorites.removeFavoritePlayer(player.playerID);
+                    favBtn.classList.add('outline');
+                    favBtn.textContent = '☆';
+                } else {
+                    window.Favorites.addFavoritePlayer({ playerID: player.playerID, name: player.name, team: teamSelect.value, year: yearSelect.value });
+                    favBtn.classList.remove('outline');
+                    favBtn.textContent = '★';
+                }
+            };
+
+            playerDiv.appendChild(nameEl);
+            playerDiv.appendChild(favBtn);
             playerList.appendChild(playerDiv);
         });
         playerCount.textContent = `Showing ${filteredPlayers.length} of ${allPlayers.length} players`;
@@ -264,4 +352,50 @@ if (teamSelect && playerSearch && yearSelect) {
     
     // Check for URL parameters on page load
     checkURLParams();
+
+    // Favorite team button handling
+    const favoriteTeamBtn = document.getElementById('favoriteTeamBtn');
+    function updateFavoriteTeamButton() {
+        if (!favoriteTeamBtn) return;
+        const selectedTeam = teamSelect.value;
+        const selectedYear = yearSelect.value;
+        if (!selectedTeam || !selectedYear) {
+            favoriteTeamBtn.classList.add('outline');
+            favoriteTeamBtn.textContent = '☆ Favorite team';
+            favoriteTeamBtn.disabled = true;
+            return;
+        }
+
+        favoriteTeamBtn.disabled = false;
+        const favTeams = window.Favorites ? window.Favorites.getFavoriteTeams() : [];
+        const existing = favTeams.find(t => t.teamCode === selectedTeam && String(t.year) === String(selectedYear));
+        if (existing) {
+            favoriteTeamBtn.classList.remove('outline');
+            favoriteTeamBtn.textContent = '★ Favorited';
+        } else {
+            favoriteTeamBtn.classList.add('outline');
+            favoriteTeamBtn.textContent = '☆ Favorite team';
+        }
+    }
+
+    if (favoriteTeamBtn) {
+        favoriteTeamBtn.addEventListener('click', () => {
+            const selectedTeam = teamSelect.value;
+            const selectedYear = yearSelect.value;
+            if (!selectedTeam || !selectedYear) return;
+            const favTeams = window.Favorites ? window.Favorites.getFavoriteTeams() : [];
+            const existing = favTeams.find(t => t.teamCode === selectedTeam && String(t.year) === String(selectedYear));
+            if (existing) {
+                window.Favorites.removeFavoriteTeam(selectedTeam, Number(selectedYear));
+            } else {
+                window.Favorites.addFavoriteTeam({ teamCode: selectedTeam, year: Number(selectedYear), name: teamNames[selectedTeam] || selectedTeam });
+            }
+            updateFavoriteTeamButton();
+        });
+
+        // re-evaluate when team/year changes
+        teamSelect.addEventListener('change', updateFavoriteTeamButton);
+        yearSelect.addEventListener('change', updateFavoriteTeamButton);
+        updateFavoriteTeamButton();
+    }
 }

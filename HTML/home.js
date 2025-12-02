@@ -289,8 +289,22 @@ async function showPlayerTeamStats(playerID, playerName, teamID, teamName, year)
             html = '<div class="no-stats">No statistics found for this player in the selected team/year.</div>';
         }
         
-        // Add "Show Full Roster" button
+        // Add quick actions: favorite player, favorite team and "Show Full Roster" button
+        const isPlayerFav = window.Favorites ? window.Favorites.getFavoritePlayers().find(p => p.playerID === playerID) : false;
+        const favPlayerText = isPlayerFav ? '★ Favorite' : '☆ Favorite';
+        const favPlayerClass = isPlayerFav ? 'favorite-btn' : 'favorite-btn outline';
+
+        const favTeams = window.Favorites ? window.Favorites.getFavoriteTeams() : [];
+        const teamCodeShort = teamCodeMapping[teamID];
+        const isTeamFav = favTeams.find(t => t.teamCode === teamCodeShort && String(t.year) === String(year));
+        const favTeamText = isTeamFav ? '★ Favorited' : '☆ Favorite team';
+        const favTeamClass = isTeamFav ? 'favorite-btn' : 'favorite-btn outline';
+
         html += `
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom:8px;">
+              <button id="homeModalFavPlayer" class="${favPlayerClass}">${favPlayerText}</button>
+              <button id="homeModalFavTeam" class="${favTeamClass}">${favTeamText}</button>
+            </div>
             <div class="modal-actions">
                 <button class="btn-show-roster" onclick="window.location.href='player-search.html?team=${teamCode}&year=${year}'">
                     Show Full Roster
@@ -299,6 +313,40 @@ async function showPlayerTeamStats(playerID, playerName, teamID, teamName, year)
         `;
         
         statsContent.innerHTML = html;
+
+        // Hook up modal favorite buttons
+        const favPlayerBtn = document.getElementById('homeModalFavPlayer');
+        if (favPlayerBtn) {
+            favPlayerBtn.onclick = () => {
+                if (!window.Favorites) return;
+                const exists = window.Favorites.getFavoritePlayers().find(p => p.playerID === playerID);
+                if (exists) {
+                    window.Favorites.removeFavoritePlayer(playerID);
+                    favPlayerBtn.classList.add('outline');
+                    favPlayerBtn.textContent = '☆ Favorite';
+                } else {
+                    window.Favorites.addFavoritePlayer({ playerID, name: playerName, team: teamCodeShort, year: Number(year) });
+                    favPlayerBtn.classList.remove('outline');
+                    favPlayerBtn.textContent = '★ Favorite';
+                }
+            };
+        }
+
+        const favTeamBtn = document.getElementById('homeModalFavTeam');
+        if (favTeamBtn) {
+            favTeamBtn.onclick = () => {
+                if (!window.Favorites) return;
+                if (isTeamFav) {
+                    window.Favorites.removeFavoriteTeam(teamCodeShort, Number(year));
+                    favTeamBtn.classList.add('outline');
+                    favTeamBtn.textContent = '☆ Favorite team';
+                } else {
+                    window.Favorites.addFavoriteTeam({ teamCode: teamCodeShort, year: Number(year), name: teamName });
+                    favTeamBtn.classList.remove('outline');
+                    favTeamBtn.textContent = '★ Favorited';
+                }
+            };
+        }
     } catch (error) {
         console.error('Error fetching stats:', error);
         statsContent.innerHTML = '<p class="no-stats">Error loading stats. Please try again.</p>';

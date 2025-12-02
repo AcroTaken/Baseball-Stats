@@ -14,6 +14,7 @@
         <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="player-search.html" class="nav-link active">Roster Search</a></li>
         <li class="nav-item"><a href="compare.html" class="nav-link">Compare</a></li>
+        <li class="nav-item"><a href="favorites.html" class="nav-link">Favorites</a></li>
       </ul>
     </div>
   </nav>
@@ -58,6 +59,9 @@
        </select>
 
       <br><br>
+
+      <button type="button" id="favoriteTeamBtn" class="favorite-btn outline" title="Add/remove favorite team">☆ Favorite team</button>
+
 
        <label for="yearID">Year</label>
        <select name="yearID" id="yearID">
@@ -107,7 +111,7 @@
   <script>
       // Players will be loaded dynamically from the server
   </script>
-
+  <script src="favorites.js"></script>
   <script src="style.js"></script>
 </body>
 </html>
