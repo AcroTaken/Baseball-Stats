@@ -21,7 +21,42 @@
 
   <div class="container">
     <h1>Compare Players</h1>
-    <p>Player comparison feature coming soon...</p>
+      <p>Pick up to three player-year entries and compare batting and pitching statistics side-by-side.</p>
+
+      <div id="compareControls" class="compare-controls">
+        <div class="player-picker" data-slot="0">
+          <input type="text" class="player-search-input" placeholder="Search player name..." />
+          <div class="player-picker-meta"></div>
+          <div class="player-team-select" style="display:none"></div>
+        </div>
+
+        <div class="player-picker" data-slot="1">
+          <input type="text" class="player-search-input" placeholder="Search player name..." />
+          <div class="player-picker-meta"></div>
+          <div class="player-team-select" style="display:none"></div>
+        </div>
+
+        <div class="player-picker" data-slot="2">
+          <input type="text" class="player-search-input" placeholder="Search player name..." />
+          <div class="player-picker-meta"></div>
+          <div class="player-team-select" style="display:none"></div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:12px; align-items:center;">
+          <button id="compareBtn" class="btn-show-roster">Compare</button>
+          <button id="clearBtn" class="btn-show-roster" style="background:#e74c3c">Clear</button>
+        </div>
+      </div>
+
+      <div id="compareResults" class="compare-results" style="margin-top:20px; display:none">
+        <h2>Comparison</h2>
+        <div id="compareTables"></div>
+      </div>
+    </div>
+
+    <script src="favorites.js"></script>
+    <script src="compare.js"></script>
+    <script src="style.js"></script>
   </div>
 
   <script src="style.js"></script>

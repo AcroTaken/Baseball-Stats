@@ -506,3 +506,23 @@ label {
 .fav-actions button.danger { background: #e74c3c; color: white; }
 .fav-actions button:hover { filter: brightness(0.95); }
 .no-favs { color: #666; font-style: italic; }
+
+/* Compare page styles */
+.compare-controls { display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start; }
+.player-picker { background:#fff; padding:10px; border-radius:8px; width:320px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+.player-search-input { width:100%; padding:10px; border-radius:6px; border:1px solid #ddd; }
+.player-picker-meta { margin-top:8px; }
+.player-team-select { margin-top:8px; }
+.compare-results { margin-top:18px; }
+.compare-table { background:white; padding:12px; border-radius:8px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin-bottom:12px; }
+.compare-row { display:flex; border-bottom:1px solid #eee; padding:8px 0; align-items:center; }
+.compare-row.header { background:#f7fbff; border-bottom:2px solid #e6f0ff; padding:12px; }
+.compare-cell { flex:1; padding:6px 10px; min-width:80px; }
+.compare-cell.stat-name { flex:0 0 120px; font-weight:600; color:#333; }
+.compare-cell.player-name { font-weight:700; }
+.compare-cell .sub { font-size:12px; color:#666; font-weight:400; }
+
+@media (max-width:900px) {
+    .compare-controls { flex-direction:column; }
+    .player-picker { width:100%; }
+}

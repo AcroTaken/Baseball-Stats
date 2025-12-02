@@ -128,9 +128,14 @@ function loadCSVData() {
         const teamID = parts[3];
         
         if (yearID >= 2015 && yearID <= 2025) {
+          // compute batting average from H and AB (some CSV files don't have AVG column)
+          const rawAB = parts[7] ? Number(parts[7]) : 0;
+          const rawH = parts[9] ? Number(parts[9]) : 0;
+          const computedAvg = rawAB > 0 ? (rawH / rawAB).toFixed(3) : null;
+
           battingData.push({
             playerID, yearID, teamID,
-            G: parts[5], AB: parts[7], R: parts[8], H: parts[9],
+            G: parts[5], AVG: computedAvg, AB: parts[7], R: parts[8], H: parts[9],
             '2B': parts[10], '3B': parts[11], HR: parts[12], RBI: parts[13],
             SB: parts[14], CS: parts[15], BB: parts[16], SO: parts[17]
           });
