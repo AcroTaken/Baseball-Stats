@@ -4,96 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Baseball Stats</title>
-  <link rel="stylesheet" href="style.css">
+  <script>
+    // Redirect to home page
+    window.location.href = 'home.html';
+  </script>
 </head>
 <body>
-  <form name="form1" id="form1" action="/action_page.php">
-      Team <select name="team" id="team">
-      <option value="">Select Team</option>
-      <option value ="adb">Arizona Diamondbacks</option>
-      <option value ="ath">Athletics</option>
-      <option value ="atl">Atlanta Braves</option>
-      <option value ="bal">Baltimore Orioles</option>
-      <option value ="bos">Boston Red Sox</option>
-      <option value ="chc">Chicago Cubs</option>
-      <option value ="cws">Chicago White Sox</option>
-      <option value ="cin">Cincinnati Reds</option>
-      <option value ="cle">Cleveland Guardians</option>
-      <option value ="col">Colorado Rockies</option>
-      <option value ="det">Detroit Tigers</option>
-      <option value ="hou">Houston Astros</option>
-      <option value ="kan">Kansas City Royals</option>
-      <option value ="laa">Los Angeles Angels</option>
-      <option value ="lad">Los Angeles Dodgers</option>
-      <option value ="mia">Miami Marlins</option>
-      <option value ="mil">Milawukee Brewers</option>
-      <option value ="min">Minessota Twins</option>
-      <option value ="nym">New York Mets</option>
-      <option value ="nyy">New York Yankees</option>
-      <option value ="phi">Philadelphia Phillies</option>
-      <option value ="pit">Pittsburgh Pirates</option>
-      <option value ="sdp">San Diego Padres</option>
-      <option value ="sfg">San Francisco Giants</option>
-      <option value ="sea">Seattle Mariners</option>
-      <option value ="stl">St. Louis Cardinals</option>
-      <option value ="tam">Tampa Bay Rays</option>
-      <option value ="tex">Texas Rangers</option>
-      <option value ="tor">Toronto Blue Jays</option>
-      <option value ="was">Washington Nationals</option>
-      </select>
-     
-      <br><br>
-
-      <label for="yearID">Year</label>
-       <select name="yearID" id="yearID">
-           <option value="">Select Year</option>
-           <option value="2015">2015</option>
-           <option value="2016">2016</option>
-           <option value="2017">2017</option>
-           <option value="2018">2018</option>
-           <option value="2019">2019</option>
-           <option value="2020">2020</option>
-           <option value="2021">2021</option>
-           <option value="2022">2022</option>
-           <option value="2023">2023</option>
-           <option value="2024">2024</option>
-           <option value="2025">2025</option>
-       </select>
-
-      <br><br>
-
-      <label for="playerSearch">Search Player:</label>
-       <input 
-         type="text" 
-         id="playerSearch" 
-         name="playerSearch" 
-         placeholder="Select Team and Year first" 
-         disabled
-       />
-  </form>
-
-  <div id="rosterDisplay" class="roster-container" style="display: none;">
-    <h2 id="rosterTitle"></h2>
-    <div id="playerCount" class="player-count"></div>
-    <div id="playerList" class="player-list"></div>
-  </div>
-
-  <!-- Stats Modal -->
-  <div id="statsModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="statsPlayerName">Player Stats</h2>
-      <div id="statsContent">
-        <p>Loading...</p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-      // Players will be loaded dynamically from the server
-  </script>
-
-  <script src="style.js"></script>
-
- </body>
+  <p>Redirecting to home page...</p>
+</body>
 </html>

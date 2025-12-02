@@ -255,6 +255,53 @@ app.get('/api/stats/:playerID/:team/:year', (req, res) => {
   }
 });
 
+// API endpoint to get all players (for search autocomplete)
+app.get('/api/all-players', (req, res) => {
+  try {
+    const players = Object.keys(peopleData).map(playerID => ({
+      playerID,
+      name: `${peopleData[playerID].nameFirst} ${peopleData[playerID].nameLast}`
+    }));
+    
+    res.json(players);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// API endpoint to get teams a player played for
+app.get('/api/player-teams/:playerID', (req, res) => {
+  try {
+    const playerID = req.params.playerID;
+    
+    // Find all unique team/year combinations for this player
+    const teams = [];
+    const seen = new Set();
+    
+    appearancesData.forEach(appearance => {
+      if (appearance.playerID === playerID) {
+        const key = `${appearance.teamID}-${appearance.yearID}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          teams.push({
+            teamID: appearance.teamID,
+            yearID: appearance.yearID
+          });
+        }
+      }
+    });
+    
+    // Sort by year (most recent first)
+    teams.sort((a, b) => b.yearID - a.yearID);
+    
+    res.json(teams);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

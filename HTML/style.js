@@ -8,6 +8,26 @@ const playerList = document.getElementById("playerList");
 
 let allPlayers = [];
 
+// Check URL parameters and pre-select team/year
+function checkURLParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const team = urlParams.get('team');
+    const year = urlParams.get('year');
+    
+    if (team && teamSelect) {
+        teamSelect.value = team;
+    }
+    
+    if (year && yearSelect) {
+        yearSelect.value = year;
+    }
+    
+    // If both are set, trigger the update
+    if (team && year) {
+        updatePlayerList();
+    }
+}
+
 // Team name mapping
 const teamNames = {
     'adb': 'Arizona Diamondbacks',
@@ -241,4 +261,7 @@ if (teamSelect && playerSearch && yearSelect) {
     teamSelect.addEventListener("change", updatePlayerList);
     yearSelect.addEventListener("change", updatePlayerList);
     playerSearch.addEventListener("input", filterPlayers);
+    
+    // Check for URL parameters on page load
+    checkURLParams();
 }

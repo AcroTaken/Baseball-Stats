@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baseball Stats - Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="nav-logo">⚾ Baseball Stats</h1>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="home.html" class="nav-link active">Home</a></li>
+        <li class="nav-item"><a href="player-search.html" class="nav-link">Roster Search</a></li>
+        <li class="nav-item"><a href="compare.html" class="nav-link">Compare</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="home-content">
+      <h1>Welcome to Baseball Stats</h1>
+      <p>Explore comprehensive baseball statistics from 2015 to 2025.</p>
+      
+      <!-- Player Search Section -->
+      <div class="search-section">
+        <h2>🔍 Search for a Player</h2>
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="homePlayerSearch" 
+            placeholder="Type player name (e.g., Aaron Judge)..."
+            autocomplete="off"
+          />
+          <div id="searchResults" class="search-results-dropdown"></div>
+        </div>
+        
+        <div id="playerTeamsDisplay" class="player-teams-display" style="display: none;">
+          <h3 id="selectedPlayerName"></h3>
+          <p class="teams-intro">Click on any team to view the full roster for that year:</p>
+          <div id="teamsList" class="teams-list"></div>
+        </div>
+      </div>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>🔍 Roster Search</h3>
+          <p>Search for players by team and year. View complete roster information and individual player statistics.</p>
+          <a href="player-search.html" class="feature-link">Go to Roster Search →</a>
+        </div>
+        
+        <div class="feature-card">
+          <h3>📊 Compare Players</h3>
+          <p>Compare statistics between multiple players side-by-side to analyze performance.</p>
+          <a href="compare.html" class="feature-link">Go to Compare →</a>
+        </div>
+      </div>
+      
+      <div class="info-section">
+        <h2>About This Database</h2>
+        <p>This application provides access to baseball statistics including:</p>
+        <ul>
+          <li>Player information and team rosters (2015-2025)</li>
+          <li>Batting statistics (Games, At Bats, Hits, Home Runs, RBI, and more)</li>
+          <li>Pitching statistics (Wins, Losses, ERA, Strikeouts, Saves, and more)</li>
+          <li>All 30 MLB teams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="home.js"></script>
+</body>
+</html>
