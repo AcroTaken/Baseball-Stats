@@ -13,6 +13,7 @@ function checkURLParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const team = urlParams.get('team');
     const year = urlParams.get('year');
+    const playerID = urlParams.get('player');
     
     if (team && teamSelect) {
         teamSelect.value = team;
@@ -24,7 +25,15 @@ function checkURLParams() {
     
     // If both are set, trigger the update
     if (team && year) {
-        updatePlayerList();
+        updatePlayerList().then(() => {
+            // If playerID is provided, show that player's stats
+            if (playerID && allPlayers.length > 0) {
+                const player = allPlayers.find(p => p.playerID === playerID);
+                if (player) {
+                    showPlayerStats(player.playerID, player.name);
+                }
+            }
+        });
     }
 }
 

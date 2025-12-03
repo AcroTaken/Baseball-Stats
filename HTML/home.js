@@ -191,6 +191,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Function to view player in roster page
+function viewPlayerInRoster(playerID, playerName, teamCode, year) {
+    // Navigate to roster search page with player highlighted
+    window.location.href = `player-search.html?team=${teamCode}&year=${year}&player=${playerID}`;
+}
+
 // Show player stats for a specific team/year
 async function showPlayerTeamStats(playerID, playerName, teamID, teamName, year) {
     // Create or get modal
@@ -306,8 +312,8 @@ async function showPlayerTeamStats(playerID, playerName, teamID, teamName, year)
               <button id="homeModalFavTeam" class="${favTeamClass}">${favTeamText}</button>
             </div>
             <div class="modal-actions">
-                <button class="btn-show-roster" onclick="window.location.href='player-search.html?team=${teamCode}&year=${year}'">
-                    Show Full Roster
+                <button class="btn-show-roster" onclick="viewPlayerInRoster('${playerID}', '${playerName}', '${teamCode}', ${year})">
+                    View Player Stats
                 </button>
             </div>
         `;
@@ -351,6 +357,12 @@ async function showPlayerTeamStats(playerID, playerName, teamID, teamName, year)
         console.error('Error fetching stats:', error);
         statsContent.innerHTML = '<p class="no-stats">Error loading stats. Please try again.</p>';
     }
+}
+
+// Function to view player in roster page
+function viewPlayerInRoster(playerID, playerName, teamCode, year) {
+    // Navigate to roster search page with player highlighted
+    window.location.href = `player-search.html?team=${teamCode}&year=${year}&player=${playerID}`;
 }
 
 // Load players on page load
