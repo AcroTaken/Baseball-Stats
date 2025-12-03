@@ -106,7 +106,8 @@ function loadCSVData() {
         const teamID = parts[1];
         const playerID = parts[3];
         
-        if (yearID >= 2015 && yearID <= 2025 && teamID && playerID) {
+        // Load all years for player history, but filter 2015-2025 for roster display
+        if (teamID && playerID && !isNaN(yearID)) {
           appearancesData.push({ yearID, teamID, playerID });
         }
       }
@@ -170,9 +171,9 @@ function loadCSVData() {
     }
     
     console.log(`Loaded ${Object.keys(peopleData).length} players`);
-    console.log(`Loaded ${appearancesData.length} appearances (2015-2025)`);
-    console.log(`Loaded ${battingData.length} batting records`);
-    console.log(`Loaded ${pitchingData.length} pitching records`);
+    console.log(`Loaded ${appearancesData.length} total appearances`);
+    console.log(`Loaded ${battingData.length} batting records (2015-2025)`);
+    console.log(`Loaded ${pitchingData.length} pitching records (2015-2025)`);
   } catch (error) {
     console.error('Error loading CSV data:', error);
   }
@@ -199,7 +200,7 @@ app.get('/api/players/:team/:year', (req, res) => {
       return res.status(400).json({ error: 'Year must be between 2015 and 2025' });
     }
     
-    // Find all players for this team and year
+    // Find all players for this team and year (only 2015-2025 for roster)
     const playerIDs = new Set();
     appearancesData.forEach(appearance => {
       if (appearance.teamID === team && appearance.yearID === year) {
