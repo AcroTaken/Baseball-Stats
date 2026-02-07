@@ -1,1 +1,41 @@
+# Baseball Stats Database Project
+
+## Overview
+This project is a full-stack database application that stores, queries, and displays Major League Baseball (MLB) statistics.  
+The goal of the project is to design a relational database and connect it to a web interface using an API, allowing users to explore teams, players, seasons, and statistics dynamically.
+
+The project focuses on **database design and querying**, with a simple frontend used to interact with the data.
+
+---
+
+## Features
+- Relational database schema for MLB data (teams, players, batting, pitching, appearances)
+- SQL constraints, views, and indexes
+- CSV-to-database data loading
+- API endpoints to query teams, players, and statistics
+- Dynamic frontend dropdowns for teams, players, and years
+- Clean Git workflow suitable for team collaboration
+
+---
+
+## Tech Stack
+
+### Backend
+- **Node.js**
+- **Express**
+- **PostgreSQL**
+- **pg (node-postgres)**
+
+### Frontend
+- **HTML**
+- **CSS**
+- **JavaScript**
+
+### Database
+- **PostgreSQL**
+- Data loaded from CSV files (Lahman-style datasets)
+
+---
+
+
 
